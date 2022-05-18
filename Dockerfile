@@ -13,12 +13,12 @@ disable_system_repos=0\n'\
 >> /etc/yum/pluginconf.d/subscription-manager.conf
 
 # Reduce the number of layers in image by minimizing the number of separate RUN commands
-# 1 - Install GCC, Python 3.9, libraries and header files needed for Python development
+# 1 - Install GCC, Git, Python 3.9, libraries and header files needed for Python development
 # 2 - Set default Python version for `python` command, `python3` already points to the newly installed Python3.9
 # 3 - Upgrade pip, after upgrading, both pip and pip3 are the same version
 # 4 - Install uwsgi
 # 5 - Clean all yum cache
-RUN yum install -y gcc python39 python39-devel && \
+RUN yum install -y gcc git python39 python39-devel && \
     alternatives --set python /usr/bin/python3.9 && \
     pip3 install --upgrade pip && \
     pip install uwsgi && \
