@@ -1,5 +1,5 @@
 # Parent image
-FROM redhat/ubi8:latest
+FROM redhat/ubi8:8.6
 
 LABEL description="HuBMAP API Docker Base Image"
 
