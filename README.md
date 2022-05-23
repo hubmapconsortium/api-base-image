@@ -1,14 +1,14 @@
 # api-base-image
 
-The `entity-api`, `uuid-api`, `ingest-api`, `search-api`, and `hubmap-auth` docker images are based on the `hubmap/api-base-image:latest` image. To update the base image:
+The docker image to be used as the base/parent image for the various HuBMAP APIs. The current version is based on the Red Hat Universal Base Image 8.6 and has Python 3.9.7 installed.
 
 ````
-docker build -t hubmap/api-base-image:latest .
+docker build -t hubmap/api-base-image:1.0.0 .
 ````
 
 Then publish it to the DockerHub:
 
 ````
 docker login
-docker push hubmap/api-base-image:latest
+docker push hubmap/api-base-image:1.0.0
 ````
