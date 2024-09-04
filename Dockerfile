@@ -1,5 +1,5 @@
 # Parent image
-FROM redhat/ubi8:8.6
+FROM redhat/ubi9:9.4
 
 LABEL description="HuBMAP API Docker Base Image"
 
@@ -18,14 +18,25 @@ disable_system_repos=0\n'\
 # 3 - Upgrade pip, after upgrading, both pip and pip3 are the same version
 # 4 - Pip install wheel and uwsgi packages. Pip uses wheel to install uwsgi
 # 5 - Clean all yum cache
-RUN yum install -y gcc git python39 python39-devel pcre pcre-devel && \
-    alternatives --set python /usr/bin/python3.9 && \
-    pip3 install --upgrade pip && \
+
+RUN yum update -y && \
+    yum install -y yum-utils && \
+    yum install -y gcc git python python-devel && \
+    python -m ensurepip --upgrade && \
     pip install wheel uwsgi && \
     yum clean all 
 
-# Install gosu for de-elevating root to hubmap user
-RUN curl -o /usr/local/bin/gosu -SL "https://github.com/tianon/gosu/releases/download/1.14/gosu-amd64" && \
-    curl -o /usr/local/bin/gosu.asc -SL "https://github.com/tianon/gosu/releases/download/1.14/gosu-amd64.asc" && \
-    rm -r /usr/local/bin/gosu.asc && \
-    chmod +x /usr/local/bin/gosu
+# Install su-exec for de-elevating root to deepphe user
+# N.B. git and gcc are also needed for su-exec installation, but since already
+#      added for uwsgi, they are simply used and are not removed like compilation-only packages.
+WORKDIR /tmp
+RUN yum install --assumeyes  procps-ng make && \
+    git clone https://github.com/ncopa/su-exec.git /tmp/su-exec && \
+    cd su-exec && \
+    make && \
+    mv su-exec /usr/local/bin/ && \
+    chmod a+x /usr/local/bin/su-exec && \
+    cd /tmp && \
+    rm -Rf /tmp/su-exec/ && \
+    yum remove --assumeyes make && \
+    yum clean all
