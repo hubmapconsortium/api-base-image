@@ -30,8 +30,8 @@ EOF
 #          place at /usr/libexec/platform-python.
 # 3 - Ensure pip is available, upgraded, and aliased 
 # 4 - Pip install wheel and uwsgi packages globally using pip3.13. Pip uses wheel to install uwsgi
-# KBKBKB @TODO - Build and install su-exec for privilege drop
-# 5 - Remove apps not needed in image, clean up yum cache to reduce size and vulnerabilities
+# 5 - Build and install su-exec for privilege drop
+# 6 - Remove apps not needed in image, clean up yum cache to reduce size and vulnerabilities
 
 # Install OS packages needed for the rest of this configuration and for
 # operations while running services in uWSGI.
