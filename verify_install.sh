@@ -10,12 +10,12 @@ package_map[gcc]="gcc.x86_64"
 package_map[git]="git.x86_64 git-core.x86_64"
 package_map[make]="make.x86_64"
 package_map[wget]="wget.x86_64"
-package_map[openssl-devel]="openssl-devel.i686"
-package_map[bzip2-devel]="bzip2-devel.i686"
-package_map[libffi-devel]="libffi-devel.i686"
-package_map[zlib-devel]="zlib-devel.i686"
-package_map[xz-devel]="xz-devel.i686"
-package_map[procps-ng]="procps-ng.i686"
+package_map[openssl-devel]="openssl-devel.x86_64"
+package_map[bzip2-devel]="bzip2-devel.x86_64"
+package_map[libffi-devel]="libffi-devel.x86_64"
+package_map[zlib-devel]="zlib-ng-compat-devel.x86_64"
+package_map[xz-devel]="xz-devel.x86_64"
+package_map[procps-ng]="procps-ng.x86_64"
 
 # Declare an associative array keyed by the generic package name to install, with
 # a value of all the architecture packages expected to be found if installed.
