@@ -1,5 +1,5 @@
 # Parent image
-FROM redhat/ubi10:latest
+FROM redhat/ubi10:10.0
 
 LABEL description="HuBMAP API Docker Base Image, Python 3.13 for uwsgi apps"
 
