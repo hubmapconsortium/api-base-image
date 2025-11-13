@@ -137,7 +137,23 @@ RUN set -eux && \
     make -C /tmp/su-exec && \
     install -m 755 /tmp/su-exec/su-exec /usr/local/bin/su-exec && \
     # Clean up artifacts to slim down this layer of the Docker Image
-    dnf remove --assumeyes procps-ng make gcc wget && \
+    dnf remove --assumeyes procps-ng make gcc git wget && \
+    dnf autoremove --assumeyes && \
+    dnf clean all && \
+    rm -rf /tmp/su-exec \
+           /var/cache/dnf \
+           /var/log/dnf \
+           /var/log/yum \
+	   /root/.cache
+
+# Deliberately install packages needed by downstream projects to
+# build or run uWSGI services
+# remove packages which were only needed by the preceding steps and not to
+# run or build uWSGI services.
+RUN set -eux && \
+    # Install what is needed, including packages used as dependencies by
+    # previous layers.
+    dnf install --assumeyes git && \
     dnf autoremove --assumeyes && \
     dnf clean all && \
     rm -rf /tmp/su-exec \
