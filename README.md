@@ -12,3 +12,15 @@ Then publish it to the DockerHub:
 docker login
 docker push hubmap/api-base-image:1.2.0
 ````
+
+To use the published image:
+
+````
+docker pull hubmap/api-base-image:1.2.0
+````
+
+In the child image Dockerfile:
+
+```
+FROM hubmap/api-base-image:1.2.0
+```
